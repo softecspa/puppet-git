@@ -45,8 +45,14 @@ define git::clone($url, $path, $protocol='https') {
     $prefix_proto="$protocol://"
   }
 
+  $x86 = $::architecture ?{
+    'x64'   => ' (x86)',
+    'amd64' => ' (x86)',
+    default => ''
+  }
+
   $git_clone_path = $::operatingsystem? {
-    'windows' => 'C:\\Program Files\\Git\\cmd',
+    'windows' => "C:\\Program Files${x86}\\Git\\cmd",
     default   => $::path
   }
 
