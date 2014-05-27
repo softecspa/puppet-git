@@ -12,26 +12,16 @@ class git::config {
       if $lsbdistcodename == 'hardy' {
         file {'/usr/bin/git-ls-files':
           ensure  => present,
-          mode    => 755,
-          owner   => root,
-          group   => root,
-          content => "#!/bin/bash\ngit ls-files \$*",
+                  mode    => 755,
+                  owner   => root,
+                  group   => root,
+                  content => "#!/bin/bash\ngit ls-files \$*",
         }
 
         exec { 'disable-ssl-verify':
           command => "/usr/bin/git config --global http.sslVerify false",
           unless  => "/usr/bin/git config --global http.sslVerify | egrep '^false\$'",
         }
-      }
-
-      exec { 'set-git-username':
-        command => "/usr/bin/git config --global user.name '${git_username}'",
-        unless  => "/usr/bin/git config --global user.name | egrep '^${git_username}\$'",
-      }
-
-      exec { 'set-git-usermail':
-        command => "/usr/bin/git config --global user.email '${git_usermail}'",
-        unless  => "/usr/bin/git config --global user.email | egrep '^${git_usermail}\$'",
       }
     }
     'windows': {
