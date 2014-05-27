@@ -19,29 +19,35 @@ class git::config {
         }
 
         exec { 'disable-ssl-verify':
-          command => "git config --global http.sslVerify false",
-                  unless  => "git config --global http.sslVerify | egrep '^false\$'",
+          command => "/usr/bin/git config --global http.sslVerify false",
+          unless  => "/usr/bin/git config --global http.sslVerify | egrep '^false\$'",
         }
       }
 
       exec { 'set-git-username':
-        command => "git config --global user.name '${git_username}'",
-                unless  => "git config --global user.name | egrep '^${git_username}\$'",
+        command => "/usr/bin/git config --global user.name '${git_username}'",
+        unless  => "/usr/bin/git config --global user.name | egrep '^${git_username}\$'",
       }
 
       exec { 'set-git-usermail':
-        command => "git config --global user.email '${git_usermail}'",
-                unless  => "git config --global user.email | egrep '^${git_usermail}\$'",
-      }   
+        command => "/usr/bin/git config --global user.email '${git_usermail}'",
+        unless  => "/usr/bin/git config --global user.email | egrep '^${git_usermail}\$'",
+      }
     }
     'windows': {
       require windows_path
-      
-      windows_path {'git':
-        ensure    => present,
-        directory => 'C:\\Program Files\\Git\\cmd',
+
+      $x86 = $::architecture?{
+        'x64'   => ' (x86)',
+        'amd64' => ' (x86)',
+        default => ''
       }
 
-    } 
+      windows_path {'git':
+        ensure    => present,
+        directory => "C:\\Program Files${x86}\\Git\\cmd",
+      }
+
+    }
   }
 }
