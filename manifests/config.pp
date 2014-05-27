@@ -12,10 +12,10 @@ class git::config {
       if $lsbdistcodename == 'hardy' {
         file {'/usr/bin/git-ls-files':
           ensure  => present,
-                  mode    => 755,
-                  owner   => root,
-                  group   => root,
-                  content => "#!/bin/bash\ngit ls-files \$*",
+          mode    => 755,
+          owner   => root,
+          group   => root,
+          content => "#!/bin/bash\ngit ls-files \$*",
         }
 
         exec { 'disable-ssl-verify':
