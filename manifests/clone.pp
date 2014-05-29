@@ -25,7 +25,12 @@
 #
 # Copyright 2012 Softec SpA
 #
-define git::clone($url, $path, $protocol='https') {
+define git::clone(
+  $url,
+  $path,
+  $protocol = 'https',
+  $user     = ''
+) {
 
   include git
 
@@ -56,10 +61,16 @@ define git::clone($url, $path, $protocol='https') {
     default   => $::path
   }
 
+  $real_user = $user?{
+    ''      => undef,
+    default => $user
+  }
+
   exec { "clone-$url":
     command   => "git clone ${prefix_proto}${url} $path",
     creates   => $path,
     require   => Class['git'],
-    path      => $git_clone_path
+    path      => $git_clone_path,
+    user      => $real_user
   }
 }
