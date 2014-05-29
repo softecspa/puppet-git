@@ -39,11 +39,11 @@ In Ubuntu it require modules:
 
 ##Usage
  * simple install git:
-    * ubuntu:
+    in ubuntu:
 
     include git
 
-    * windows
+    in windows:
 
     class{'git': tmp_dir => 'C:\\tmp_path'}
 
