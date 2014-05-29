@@ -26,7 +26,7 @@ class git (
     tmp_dir => $tmp_dir
   }
   include git::config
-  
+
   Class['git::install'] ->
   Class['git::config']
 }
