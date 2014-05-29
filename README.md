@@ -40,9 +40,9 @@ In Ubuntu it require modules:
 ##Usage
  * simple install git:
     * ubuntu
-    include git
+        include git
     * windows
-    class{'git': tmp_dir => 'C:\\tmp_path'}
+        class{'git': tmp_dir => 'C:\\tmp_path'}
 
 
 ## Limitations
