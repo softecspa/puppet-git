@@ -38,14 +38,15 @@ In Ubuntu it require modules:
  * softecspa/apt
 
 ##Usage
- * simple install git:
-    in ubuntu:
+
+###Ubuntu
+install git
 
     include git
 
-    in windows:
+###Windows
+install git
 
     class{'git': tmp_dir => 'C:\\tmp_path'}
-
 
 ## Limitations
