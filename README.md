@@ -31,7 +31,7 @@ This module manage installation of git. It work and it's tested on:
 
 ###Setup Requirements
 in windows it require modules:
- * softecspa/puppet-cygwin
+ * softecspa/puppetlabs-powershell
  * basti1302/puppet-windows-path
 
 In Ubuntu it require modules:

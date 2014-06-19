@@ -22,13 +22,17 @@ class git::install (
 
       $source   = 'https://github.com/msysgit/msysgit/releases/download/Git-1.9.2-preview20140411/Git-1.9.2-preview20140411.exe'
       $filename = "${tmp_dir}\\Git-1.9.2-preview20140411.exe"
+      $pkg_name = 'Git version 1.9.2-preview20140411'
 
-      cygwin::wget{$source:
-        path    => $filename,
-        before  => Package['Git version 1.9.2-preview20140411'],
+      exec {'download git':
+        command   => "\$(New-Object System.Net.WebClient).DownloadFile('$source','$filename')",
+        creates   => $filename,
+        provider  => powershell,
+        path      => $::path,
+        before    => Package[$pkg_name],
       }
 
-      package {'Git version 1.9.2-preview20140411':
+      package {$pkg_name:
         ensure          => installed,
         source          => $filename,
         provider        => 'windows',
