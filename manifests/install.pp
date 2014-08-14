@@ -7,8 +7,9 @@ class git::install (
       if !defined(Package['git-core']) {
       # abilitare il mirror non appena cassiamo le hardy
       # non abbiamo i deb per quella dist
-        apt::ppa { 'git-core/ppa':
-          key => 'E1DF1F24',
+        softec_apt::ppa{'git-core/ppa':
+          mirror  => true,
+          key     => 'E1DF1F24'
         } ->
         package { 'git-core':
           ensure => latest
@@ -17,7 +18,7 @@ class git::install (
     }
     'windows': {
       if $tmp_dir == '' {
-        fail('you must specify tmp_dir in git class for OS windows')  
+        fail('you must specify tmp_dir in git class for OS windows')
       }
 
       $source   = 'https://github.com/msysgit/msysgit/releases/download/Git-1.9.2-preview20140411/Git-1.9.2-preview20140411.exe'
