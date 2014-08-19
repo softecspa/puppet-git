@@ -8,7 +8,7 @@ class git::install (
       # abilitare il mirror non appena cassiamo le hardy
       # non abbiamo i deb per quella dist
         softec_apt::ppa{'git-core/ppa':
-          mirror  => true,
+          #mirror  => true,
           key     => 'E1DF1F24'
         } ->
         package { 'git-core':
