@@ -8,8 +8,7 @@ class git::install (
       # abilitare il mirror non appena cassiamo le hardy
       # non abbiamo i deb per quella dist
         softec_apt::ppa{'git-core/ppa':
-          #mirror  => true,
-          key     => 'E1DF1F24'
+          key     => 'E1DD270288B4E6030699E45FA1715D88E1DF1F24'
         } ->
         package { 'git-core':
           ensure => latest
@@ -25,7 +24,7 @@ class git::install (
       $filename = "${tmp_dir}\\Git-1.9.2-preview20140411.exe"
       $pkg_name = 'Git version 1.9.2-preview20140411'
 
-      exec {'download git':
+      exec { 'download git':
         command   => "\$(New-Object System.Net.WebClient).DownloadFile('$source','$filename')",
         creates   => $filename,
         provider  => powershell,
@@ -33,7 +32,7 @@ class git::install (
         before    => Package[$pkg_name],
       }
 
-      package {$pkg_name:
+      package { $pkg_name:
         ensure          => installed,
         source          => $filename,
         provider        => 'windows',
