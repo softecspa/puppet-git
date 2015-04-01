@@ -15,6 +15,7 @@ class git::install (
         }
       }
     }
+    # TODO: on windows platform we must adopt chocolatey to install packages
     'windows': {
       if $tmp_dir == '' {
         fail('you must specify tmp_dir in git class for OS windows')
